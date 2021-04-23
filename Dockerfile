@@ -5,7 +5,7 @@ WORKDIR /var/app
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
 
-COPY hw10 .
+COPY . .
 
 RUN poetry install --no-interaction --no-ansi
 
