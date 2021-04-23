@@ -27,7 +27,6 @@ next_index = iter(range(len(FLATS), 100))
 def flats_list():
     return render_template("flats/index.html", flats=FLATS.values())
 
-
 @flat_app.route("/<int:flat_id>/", methods=["GET", "POST"], endpoint="details")
 def flat_details(flat_id):
     if flat_id not in FLATS:
@@ -58,3 +57,9 @@ def flat_add():
                     cold_water=request.form.get("cold_water"))
     FLATS[next_id] = new_flat
     return redirect(url_for("flat_app.list"))
+
+@flat_app.route("/reset/",  methods=["DELETE"], endpoint="reset")
+def flats_reset():
+    FLATS.clear()
+    FLATS.update(get_default_flats())
+    return {"ok": True}
